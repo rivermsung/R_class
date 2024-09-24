@@ -23,7 +23,7 @@ filter<-students$gender=="female"
 students[filter,]->female
 
 #make s subset in a short way
-female<-students[filter<-students$gender=='female',]
+female<-students[students$gender=='female',]
 
 #change row or col names(c for combine)
 rownames(females)<-c('Vanessa', 'Vicky', 'Michelle', 'Joyce', 'Victoria')
