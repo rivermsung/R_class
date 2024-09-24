@@ -22,6 +22,9 @@ filter<-students$gender=="female"
 #make a filter into object
 students[filter,]->female
 
+#make s subset in a short way
+female<-students[filter<-students$gender=='female',]
+
 #change row or col names(c for combine)
 rownames(females)<-c('Vanessa', 'Vicky', 'Michelle', 'Joyce', 'Victoria')
 
@@ -42,6 +45,7 @@ students[order(students$height),]
 
 # If `condition` then give 'blue'. If not then gives 'red'.
 colors<-ifelse(students$gender=='male', 'blue','red') 
+#ifelse can be inside a ifelse
 
 # create a new column
 students$colors<-ifelse(students$gender=='male','blue','red') 
