@@ -20,7 +20,6 @@ rairuoho$treatment<-ifelse(rairuoho$treatment=='nutrient', 'enriched','water')
 
 ```{r}
 rairuoho1 <- rairuoho %>% pivot_longer(day3:day8, names_to = "day", values_to = "length")
-rairuoho1
 ```
 
 ```{r}
@@ -30,5 +29,6 @@ rairuoho2 <- rairuoho1 %>%  unite(col=Spatial, spatial1:spatial2, sep = "_", rem
 ```{r}
 rairuoho2$row <- NULL
 rairuoho2$column <- NULL
+rairuoho2
 ```
 

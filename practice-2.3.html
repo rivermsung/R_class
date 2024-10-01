@@ -359,25 +359,25 @@ display: none;
 
 <pre class="r"><code>rairuoho&lt;-read.table(&#39;https://www.dipintothereef.com/uploads/3/7/3/5/37359245/rairuoho.txt&#39;,,header=T, sep=&quot;\t&quot;, dec=&quot;.&quot;, na.strings = &quot;n/a&quot;)</code></pre>
 <pre class="r"><code>rairuoho$treatment&lt;-ifelse(rairuoho$treatment==&#39;nutrient&#39;, &#39;enriched&#39;,&#39;water&#39;)</code></pre>
-<pre class="r"><code>rairuoho1 &lt;- rairuoho %&gt;% pivot_longer(day3:day8, names_to = &quot;day&quot;, values_to = &quot;length&quot;)
-rairuoho1</code></pre>
-<pre><code>## # A tibble: 288 × 9
-##    germinate bed    treatment spatial1 spatial2   row column day   length
-##        &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;int&gt;  &lt;int&gt; &lt;chr&gt;  &lt;int&gt;
-##  1        18 paper4 enriched  upper    left         1      1 day3       2
-##  2        18 paper4 enriched  upper    left         1      1 day4      13
-##  3        18 paper4 enriched  upper    left         1      1 day5      34
-##  4        18 paper4 enriched  upper    left         1      1 day6      85
-##  5        18 paper4 enriched  upper    left         1      1 day7     112
-##  6        18 paper4 enriched  upper    left         1      1 day8     121
-##  7        19 mould1 enriched  upper    left         2      1 day3       5
-##  8        19 mould1 enriched  upper    left         2      1 day4      22
-##  9        19 mould1 enriched  upper    left         2      1 day5      60
-## 10        19 mould1 enriched  upper    left         2      1 day6      95
-## # ℹ 278 more rows</code></pre>
+<pre class="r"><code>rairuoho1 &lt;- rairuoho %&gt;% pivot_longer(day3:day8, names_to = &quot;day&quot;, values_to = &quot;length&quot;)</code></pre>
 <pre class="r"><code>rairuoho2 &lt;- rairuoho1 %&gt;%  unite(col=Spatial, spatial1:spatial2, sep = &quot;_&quot;, remove = TRUE)</code></pre>
 <pre class="r"><code>rairuoho2$row &lt;- NULL
-rairuoho2$column &lt;- NULL</code></pre>
+rairuoho2$column &lt;- NULL
+rairuoho2</code></pre>
+<pre><code>## # A tibble: 288 × 6
+##    germinate bed    treatment Spatial    day   length
+##        &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;  &lt;int&gt;
+##  1        18 paper4 enriched  upper_left day3       2
+##  2        18 paper4 enriched  upper_left day4      13
+##  3        18 paper4 enriched  upper_left day5      34
+##  4        18 paper4 enriched  upper_left day6      85
+##  5        18 paper4 enriched  upper_left day7     112
+##  6        18 paper4 enriched  upper_left day8     121
+##  7        19 mould1 enriched  upper_left day3       5
+##  8        19 mould1 enriched  upper_left day4      22
+##  9        19 mould1 enriched  upper_left day5      60
+## 10        19 mould1 enriched  upper_left day6      95
+## # ℹ 278 more rows</code></pre>
 
 
 
