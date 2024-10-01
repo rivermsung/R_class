@@ -2,6 +2,7 @@ library (dplyr)
 
 summarised <- summarise(iris, Mean.Width = mean(Sepal.Width))
 head(summarised)
+
 # by column names/'::'specify which package and don't need to library
 selection1 <- dplyr::select(iris, Sepal.Length, Sepal.Width, Petal.Length)
 head(selection1) 
