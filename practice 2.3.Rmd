@@ -1,0 +1,34 @@
+---
+title: "practice 2.3"
+author: "Daniel"
+date: "2024-10-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyr)
+```
+```{r}
+rairuoho<-read.table('https://www.dipintothereef.com/uploads/3/7/3/5/37359245/rairuoho.txt',,header=T, sep="\t", dec=".", na.strings = "n/a")
+```
+
+```{r}
+rairuoho$treatment<-ifelse(rairuoho$treatment=='nutrient', 'enriched','water')
+```
+
+```{r}
+rairuoho1 <- rairuoho %>% pivot_longer(day3:day8, names_to = "day", values_to = "length")
+rairuoho1
+```
+
+```{r}
+rairuoho2 <- rairuoho1 %>%  unite(col=Spatial, spatial1:spatial2, sep = "_", remove = TRUE)
+```
+
+```{r}
+rairuoho2$row <- NULL
+rairuoho2$column <- NULL
+```
+

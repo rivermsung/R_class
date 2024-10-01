@@ -76,7 +76,7 @@ income_long <- income %>% pivot_longer(cols = -state,names_to = c("gender","work
 income_long
 
 #reversely
-income_long %>% pivot_wider(names_from = c(gender,work), values_from = income, names_sep = ".")
+income_long %>% pivot_wider(names_from = c('gender','work'), values_from = income, names_sep = ".")
 
 # Let's first create a delimited table/'-1'means except for first column
 income_long_var <- income %>%  pivot_longer(cols = -1, names_to = "var1", values_to = "income")
