@@ -1,0 +1,39 @@
+---
+title: "practice 3.2"
+author: "Daniel"
+date: "2024-10-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+start_experiment <- c(4.0, 5.0, 3.0, 6.0, 7.0)
+end_experiment<- c(9.0, 6.0, 5.0, 4.0, 7.0)
+data_1 <- data.frame(start_experiment, end_experiment)
+rownames(data_1)<- c("plant 1", "plant 2", "plant 3", "plant 4", "plant 5")
+data_1
+```
+
+```{r}
+library(tidyr)
+data_long <- data_1 %>% pivot_longer(start_experiment:end_experiment, names_to = "time", values_to ="height")
+data_long
+str(data_long)
+```
+
+```{r}
+A <- rownames(data_1)
+B <- (end_experiment-start_experiment)/start_experiment
+C <- data.frame(A,B)
+growth <- list(A=A, B=B, C=C)
+str(growth)
+```
+
+```{r}
+C <- "plant 4 did'nt grow"
+my.experiment <- list(A=data_long, B=growth, C=C)
+str(my.experiment)
+```

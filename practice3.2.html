@@ -11,9 +11,9 @@
 
 <meta name="author" content="Daniel" />
 
-<meta name="date" content="2024-10-01" />
+<meta name="date" content="2024-10-08" />
 
-<title>practice 2.3</title>
+<title>practice 3.2</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,43 +350,69 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">practice 2.3</h1>
+<h1 class="title toc-ignore">practice 3.2</h1>
 <h4 class="author">Daniel</h4>
-<h4 class="date">2024-10-01</h4>
+<h4 class="date">2024-10-08</h4>
 
 </div>
 
 
-<pre class="r"><code>rairuoho&lt;-read.table(&#39;https://www.dipintothereef.com/uploads/3/7/3/5/37359245/rairuoho.txt&#39;,,header=T, sep=&quot;\t&quot;, dec=&quot;.&quot;, na.strings = &quot;n/a&quot;)</code></pre>
-<pre class="r"><code>rairuoho$treatment&lt;-ifelse(rairuoho$treatment==&#39;nutrient&#39;, &#39;enriched&#39;,&#39;water&#39;)</code></pre>
-<pre class="r"><code>rairuoho1 &lt;- rairuoho %&gt;% pivot_longer(day3:day8, names_to = &quot;day&quot;, values_to = &quot;length&quot;)</code></pre>
-<pre class="r"><code>rairuoho2 &lt;- rairuoho1 %&gt;%  unite(col=Spatial, spatial1:spatial2, sep = &quot;_&quot;, remove = TRUE)</code></pre>
-<pre class="r"><code>rairuoho2$row &lt;- NULL
-rairuoho2$column &lt;- NULL
-rairuoho2$day&lt;-as.factor(rairuoho2$day)
-str(rairuoho2)</code></pre>
-<pre><code>## tibble [288 × 6] (S3: tbl_df/tbl/data.frame)
-##  $ germinate: int [1:288] 18 18 18 18 18 18 19 19 19 19 ...
-##  $ bed      : chr [1:288] &quot;paper4&quot; &quot;paper4&quot; &quot;paper4&quot; &quot;paper4&quot; ...
-##  $ treatment: chr [1:288] &quot;enriched&quot; &quot;enriched&quot; &quot;enriched&quot; &quot;enriched&quot; ...
-##  $ Spatial  : chr [1:288] &quot;upper_left&quot; &quot;upper_left&quot; &quot;upper_left&quot; &quot;upper_left&quot; ...
-##  $ day      : Factor w/ 6 levels &quot;day3&quot;,&quot;day4&quot;,..: 1 2 3 4 5 6 1 2 3 4 ...
-##  $ length   : int [1:288] 2 13 34 85 112 121 5 22 60 95 ...</code></pre>
-<pre class="r"><code>rairuoho2</code></pre>
-<pre><code>## # A tibble: 288 × 6
-##    germinate bed    treatment Spatial    day   length
-##        &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;      &lt;fct&gt;  &lt;int&gt;
-##  1        18 paper4 enriched  upper_left day3       2
-##  2        18 paper4 enriched  upper_left day4      13
-##  3        18 paper4 enriched  upper_left day5      34
-##  4        18 paper4 enriched  upper_left day6      85
-##  5        18 paper4 enriched  upper_left day7     112
-##  6        18 paper4 enriched  upper_left day8     121
-##  7        19 mould1 enriched  upper_left day3       5
-##  8        19 mould1 enriched  upper_left day4      22
-##  9        19 mould1 enriched  upper_left day5      60
-## 10        19 mould1 enriched  upper_left day6      95
-## # ℹ 278 more rows</code></pre>
+<pre class="r"><code>start_experiment &lt;- c(4.0, 5.0, 3.0, 6.0, 7.0)
+end_experiment&lt;- c(9.0, 6.0, 5.0, 4.0, 7.0)
+data_1 &lt;- data.frame(start_experiment, end_experiment)
+rownames(data_1)&lt;- c(&quot;plant 1&quot;, &quot;plant 2&quot;, &quot;plant 3&quot;, &quot;plant 4&quot;, &quot;plant 5&quot;)
+data_1</code></pre>
+<pre><code>##         start_experiment end_experiment
+## plant 1                4              9
+## plant 2                5              6
+## plant 3                3              5
+## plant 4                6              4
+## plant 5                7              7</code></pre>
+<pre class="r"><code>library(tidyr)
+data_long &lt;- data_1 %&gt;% pivot_longer(start_experiment:end_experiment, names_to = &quot;time&quot;, values_to =&quot;height&quot;)
+data_long</code></pre>
+<pre><code>## # A tibble: 10 × 2
+##    time             height
+##    &lt;chr&gt;             &lt;dbl&gt;
+##  1 start_experiment      4
+##  2 end_experiment        9
+##  3 start_experiment      5
+##  4 end_experiment        6
+##  5 start_experiment      3
+##  6 end_experiment        5
+##  7 start_experiment      6
+##  8 end_experiment        4
+##  9 start_experiment      7
+## 10 end_experiment        7</code></pre>
+<pre class="r"><code>str(data_long)</code></pre>
+<pre><code>## tibble [10 × 2] (S3: tbl_df/tbl/data.frame)
+##  $ time  : chr [1:10] &quot;start_experiment&quot; &quot;end_experiment&quot; &quot;start_experiment&quot; &quot;end_experiment&quot; ...
+##  $ height: num [1:10] 4 9 5 6 3 5 6 4 7 7</code></pre>
+<pre class="r"><code>A &lt;- rownames(data_1)
+B &lt;- (end_experiment-start_experiment)/start_experiment
+C &lt;- data.frame(A,B)
+growth &lt;- list(A=A, B=B, C=C)
+str(growth)</code></pre>
+<pre><code>## List of 3
+##  $ A: chr [1:5] &quot;plant 1&quot; &quot;plant 2&quot; &quot;plant 3&quot; &quot;plant 4&quot; ...
+##  $ B: num [1:5] 1.25 0.2 0.667 -0.333 0
+##  $ C:&#39;data.frame&#39;:   5 obs. of  2 variables:
+##   ..$ A: chr [1:5] &quot;plant 1&quot; &quot;plant 2&quot; &quot;plant 3&quot; &quot;plant 4&quot; ...
+##   ..$ B: num [1:5] 1.25 0.2 0.667 -0.333 0</code></pre>
+<pre class="r"><code>C &lt;- &quot;plant 4 did&#39;nt grow&quot;
+my.experiment &lt;- list(A=data_long, B=growth, C=C)
+str(my.experiment)</code></pre>
+<pre><code>## List of 3
+##  $ A: tibble [10 × 2] (S3: tbl_df/tbl/data.frame)
+##   ..$ time  : chr [1:10] &quot;start_experiment&quot; &quot;end_experiment&quot; &quot;start_experiment&quot; &quot;end_experiment&quot; ...
+##   ..$ height: num [1:10] 4 9 5 6 3 5 6 4 7 7
+##  $ B:List of 3
+##   ..$ A: chr [1:5] &quot;plant 1&quot; &quot;plant 2&quot; &quot;plant 3&quot; &quot;plant 4&quot; ...
+##   ..$ B: num [1:5] 1.25 0.2 0.667 -0.333 0
+##   ..$ C:&#39;data.frame&#39;:    5 obs. of  2 variables:
+##   .. ..$ A: chr [1:5] &quot;plant 1&quot; &quot;plant 2&quot; &quot;plant 3&quot; &quot;plant 4&quot; ...
+##   .. ..$ B: num [1:5] 1.25 0.2 0.667 -0.333 0
+##  $ C: chr &quot;plant 4 did&#39;nt grow&quot;</code></pre>
 
 
 

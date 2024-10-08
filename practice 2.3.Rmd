@@ -29,6 +29,8 @@ rairuoho2 <- rairuoho1 %>%  unite(col=Spatial, spatial1:spatial2, sep = "_", rem
 ```{r}
 rairuoho2$row <- NULL
 rairuoho2$column <- NULL
+rairuoho2$day<-as.factor(rairuoho2$day)
+str(rairuoho2)
 rairuoho2
 ```
 
