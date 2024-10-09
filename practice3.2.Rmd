@@ -33,7 +33,7 @@ str(growth)
 ```
 
 ```{r}
-C <- "plant 4 did'nt grow"
+C <- "plant 4 and 5 did'nt grow"
 my.experiment <- list(A=data_long, B=growth, C=C)
 str(my.experiment)
 ```
