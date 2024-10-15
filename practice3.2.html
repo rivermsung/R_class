@@ -357,6 +357,7 @@ display: none;
 </div>
 
 
+<pre class="r"><code>library(tidyr)</code></pre>
 <pre class="r"><code>start_experiment &lt;- c(4.0, 5.0, 3.0, 6.0, 7.0)
 end_experiment&lt;- c(9.0, 6.0, 5.0, 4.0, 7.0)
 data_1 &lt;- data.frame(start_experiment, end_experiment)
@@ -368,8 +369,7 @@ data_1</code></pre>
 ## plant 3                3              5
 ## plant 4                6              4
 ## plant 5                7              7</code></pre>
-<pre class="r"><code>library(tidyr)
-data_long &lt;- data_1 %&gt;% pivot_longer(start_experiment:end_experiment, names_to = &quot;time&quot;, values_to =&quot;height&quot;)
+<pre class="r"><code>data_long &lt;- data_1 %&gt;% pivot_longer(start_experiment:end_experiment, names_to = &quot;time&quot;, values_to =&quot;height&quot;)
 data_long</code></pre>
 <pre><code>## # A tibble: 10 × 2
 ##    time             height
@@ -401,18 +401,41 @@ str(growth)</code></pre>
 ##   ..$ B: num [1:5] 1.25 0.2 0.667 -0.333 0</code></pre>
 <pre class="r"><code>C &lt;- &quot;plant 4 and 5 did&#39;nt grow&quot;
 my.experiment &lt;- list(A=data_long, B=growth, C=C)
-str(my.experiment)</code></pre>
-<pre><code>## List of 3
-##  $ A: tibble [10 × 2] (S3: tbl_df/tbl/data.frame)
-##   ..$ time  : chr [1:10] &quot;start_experiment&quot; &quot;end_experiment&quot; &quot;start_experiment&quot; &quot;end_experiment&quot; ...
-##   ..$ height: num [1:10] 4 9 5 6 3 5 6 4 7 7
-##  $ B:List of 3
-##   ..$ A: chr [1:5] &quot;plant 1&quot; &quot;plant 2&quot; &quot;plant 3&quot; &quot;plant 4&quot; ...
-##   ..$ B: num [1:5] 1.25 0.2 0.667 -0.333 0
-##   ..$ C:&#39;data.frame&#39;:    5 obs. of  2 variables:
-##   .. ..$ A: chr [1:5] &quot;plant 1&quot; &quot;plant 2&quot; &quot;plant 3&quot; &quot;plant 4&quot; ...
-##   .. ..$ B: num [1:5] 1.25 0.2 0.667 -0.333 0
-##  $ C: chr &quot;plant 4 and 5 did&#39;nt grow&quot;</code></pre>
+names(my.experiment)[[2]]&lt;-&quot;growth&quot;
+my.experiment</code></pre>
+<pre><code>## $A
+## # A tibble: 10 × 2
+##    time             height
+##    &lt;chr&gt;             &lt;dbl&gt;
+##  1 start_experiment      4
+##  2 end_experiment        9
+##  3 start_experiment      5
+##  4 end_experiment        6
+##  5 start_experiment      3
+##  6 end_experiment        5
+##  7 start_experiment      6
+##  8 end_experiment        4
+##  9 start_experiment      7
+## 10 end_experiment        7
+## 
+## $growth
+## $growth$A
+## [1] &quot;plant 1&quot; &quot;plant 2&quot; &quot;plant 3&quot; &quot;plant 4&quot; &quot;plant 5&quot;
+## 
+## $growth$B
+## [1]  1.2500000  0.2000000  0.6666667 -0.3333333  0.0000000
+## 
+## $growth$C
+##         A          B
+## 1 plant 1  1.2500000
+## 2 plant 2  0.2000000
+## 3 plant 3  0.6666667
+## 4 plant 4 -0.3333333
+## 5 plant 5  0.0000000
+## 
+## 
+## $C
+## [1] &quot;plant 4 and 5 did&#39;nt grow&quot;</code></pre>
 
 
 
