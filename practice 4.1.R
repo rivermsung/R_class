@@ -1,3 +1,5 @@
+pdf(file = "Petal width vs. length.pdf", paper = "A4")
+
 color<-c("setosa"="black", "versicolor"="red", "virginica"="green")
 shape<-c("setosa"=1, "versicolor"=2, "virginica"=3)
 
@@ -12,5 +14,4 @@ abline(lm(Petal.Width~Petal.Length, data=iris), col="black")
 
 text(5,0.5, 'R=0.96', col='black')
 
-pdf(file = "Petal width vs. length.pdf", paper = "A4")
 dev.off()
