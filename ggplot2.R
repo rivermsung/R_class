@@ -97,3 +97,7 @@ pcPlot <- ggplot(data=patients_clean,
 pcPlot+geom_point()+stat_smooth(aes(x=Weight,y=Height),method="lm",
                                 inherit.aes = F)
 
+p <- ggplot(iris, aes(Sepal.Length, Sepal.Width, colour = Species))+
+  geom_point()
+p + theme_wsj()+ scale_colour_wsj("colors6")+
+  ggtitle("Iris data")
