@@ -1,3 +1,16 @@
+---
+title: "practice 5.1"
+author: "Daniel"
+date: "2024-11-03"
+output: html_document
+---
+
+```{r}
+library(terra)
+library(rgbif)
+```
+
+```{r}
 Taiwan<-"C:/Users/dan91/Rstudio/data/直轄市、縣(市)界線檔(TWD97經緯度)1130719/COUNTY_MOI_1130718.shp"
 Taiwan<-vect(Taiwan)
 e <- ext(120, 122.5, 21.5, 25.5)
@@ -25,3 +38,4 @@ legend(x=122.5, y=24,
        pt.cex=c(1,NA),
        fill=c(NA,"lightblue"),
        border=c(NA,"black"))
+```
