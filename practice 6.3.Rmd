@@ -1,3 +1,11 @@
+---
+title: "practice 6.3"
+author: "Daniel"
+date: "2024-11-07"
+output: html_document
+---
+
+```{r}
 LV<-function(a12, a21){
   num_gen<-30
   generation<-1:num_gen
@@ -25,7 +33,10 @@ LV<-function(a12, a21){
     {plot(N1~generation, ylim=c(0,120), type='b', ylab="N")
     lines(N2~generation, type='b', col="red")}
   }
+```
+```{r}
 par(mar=c(5,4,1,1), mfrow=c(3,1))
+
 LV(0,0.8)
 text(2,100, "species 1")
 
@@ -34,6 +45,5 @@ text(2,100, "species 2")
 
 LV(1.2,0.8)
 text(2,100, "competition")
-
-
+```
 
