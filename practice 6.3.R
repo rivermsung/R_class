@@ -1,39 +1,42 @@
-LV<-function(a12, a21){
+library(animation)
+LV<-function(st1, st2, a){
   num_gen<-30
   generation<-1:num_gen
   N1<-rep(0,num_gen)
   N2<-rep(0,num_gen)
-  N1[1]<-5
-  N2[1]<-5
+  N1[1]<-st1
+  N2[1]<-st2
   K1<-100
   K2<-120
-  growth.rate1<-1.2
-  growth.rate2<-1.2
+  growth.rate<-1.2
   for (t in 1:(num_gen-1)){
-    N1[t+1]=N1[t]+(growth.rate1*N1[t]*((K1-N1[t]-(a12*N2[t]))/K1))
-    N2[t+1]=N2[t]+(growth.rate2*N2[t]*((K2-N2[t]-(a21*N1[t]))/K2))
+    N1[t+1]=N1[t]+(growth.rate*N1[t]*((K1-N1[t]-(a*N2[t]))/K1))
+    N2[t+1]=N2[t]+(growth.rate*N2[t]*((K2-N2[t]-(a*N1[t]))/K2))
   }
-  if(a12==0 & a21!=0)
-    {plot(N1~generation, ylim=c(0,120), type='b', ylab="N")
-    lines(N2~generation, type='n')
-    } 
-  if(a12!=0 & a21==0) 
-    {plot(N2~generation, ylim=c(0,120), type='b', ylab="N", col="red")
-      lines(N1~generation, type='n')
-    }
-  if(a12!=0 & a21!=0)
-    {plot(N1~generation, ylim=c(0,120), type='b', ylab="N")
-    lines(N2~generation, type='b', col="red")}
+  if(N1[1]>0)
+  {plot(N1~generation, ylim=c(0,120), type='b', ylab="N")
+  } else{
+    plot(N1~generation, ylim=c(0,120), type='n', ylab="N", col="red")
   }
+  if(N2[1]>0) 
+  {lines(N2~generation, type='b', col="red")
+  }}
+
 par(mar=c(5,4,1,1), mfrow=c(3,1))
-LV(0,0.8)
+
+LV(1,0,1.2)
 text(2,100, "species 1")
 
-LV(1.2,0)
+LV(0,1,1.2)
 text(2,100, "species 2")
 
-LV(1.2,0.8)
+LV(1,1,1.2)
 text(2,100, "competition")
+
+saveGIF({
+  for(a in seq(0.5,1.5, by=0.1)){
+    LV(1,1,a)
+  }},interval=0.2)
 
 
 
