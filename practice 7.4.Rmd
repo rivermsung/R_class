@@ -31,9 +31,9 @@ pearson<-function(x,y){
 In nutrient treatment:
 ----------------------
 
-H0:day3 and day4/day8 have no correlations
+H0:day3 and day4/day8 are not correlated
 
-H1:day3 and day4/day8 have correlations
+H1:day3 and day4/day8 are correlated
 
 ```{r}
 day3_n<-rairuoho %>% filter(treatment=="nutrient") %>% pull(day3)
@@ -45,19 +45,19 @@ day8_n<-rairuoho %>% filter(treatment=="nutrient") %>% pull(day8)
 ```{r}
 pearson(day3_n, day4_n)
 ```
-p-value< 0.05 -> day3_n and day4_n have correlations
+p-value< 0.05 -> day3_n and day4_n are correlated
 
 ```{r}
 pearson(day3_n, day8_n)
 ```
-p-value> 0.05 -> day3_n and day4_n have no correlations
+p-value> 0.05 -> day3_n and day4_n are not correlated
 
 In water treatment:
 --------------------
 
-H0:day3 and day4/day8 have no correlations
+H0:day3 and day4/day8 are not correlated
 
-H1:day3 and day4/day8 have correlations
+H1:day3 and day4/day8 are correlated
 
 ```{r}
 day3_w<-rairuoho %>% filter(treatment=="water") %>% pull(day3)
@@ -69,10 +69,10 @@ day8_w<-rairuoho %>% filter(treatment=="water") %>% pull(day8)
 ```{r}
 pearson(day3_w, day4_w)
 ```
-p-value< 0.05 -> day3_n and day4_n have correlations
+p-value< 0.05 -> day3_n and day4_n are correlated
 
 ```{r}
 pearson(day3_w, day8_w)
 ```
-p-value< 0.05 -> day3_n and day4_n have correlations
+p-value< 0.05 -> day3_n and day4_n are correlated
 
